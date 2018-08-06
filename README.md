@@ -7,7 +7,7 @@ Dockerをよしなにインストール
 ## 使い方
 
 ```
-$ git clone 
+$ git clone https://github.com/nomotohiroki/buildservers-docker-compose.git
 $ cd buildservers
 $ docker-compose up -d --build
 ```
