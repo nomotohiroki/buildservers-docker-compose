@@ -1,0 +1,22 @@
+node {
+    def app
+    stage('shutdown old') {
+        try {
+            sh "docker stop ${env.JOB_NAME}"
+        } catch(Exception e) {
+            print "error occured on Stop Old Docker Container."
+        }
+        try {
+            sh "docker rm ${env.JOB_NAME}"
+        } catch(Exception e) {
+            print "error occured on rm Old Docker Container."
+        }
+    }
+    stage('pull') {
+        app = docker.image("localhost:5000/myproject-${params.BRANCH_NAME}:latest")
+        app.pull()
+    }
+    stage('run') {
+        app.run("-p 3000:3000 --name ${env.JOB_NAME}")
+    }
+}

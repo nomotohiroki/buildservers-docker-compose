@@ -1,0 +1,5 @@
+FROM jenkinsci/blueocean
+
+USER root
+RUN git config --global http.sslVerify false
+
